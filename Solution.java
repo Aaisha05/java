@@ -1,0 +1,21 @@
+
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        Set<String> set = new HashSet<>(wordDict);
+
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                String prefix = s.substring(j, i);
+                if (dp[j] && set.contains(prefix)) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+
+        return dp[s.length()];
+    }
+}
